@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Big Island — 7 Days in Hawaiʻi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0e0d0b;--surface:#161410;--card:#1c1a16;--border:rgba(255,255,255,0.07);--border-hi:rgba(255,255,255,0.14);
+  --text:#e8e4db;--muted:#8a8479;--faint:#4a4640;
+  --gold:#c9a84c;--gold-dim:#7a6028;--gold-bg:rgba(201,168,76,0.08);
+  --teal:#2dbf8a;--teal-dim:#0e6b4a;--teal-bg:rgba(45,191,138,0.08);
+  --coral:#e06840;--coral-dim:#7a3318;
+  --blue:#5b9fd4;--blue-dim:#1a4a70;--blue-bg:rgba(91,159,212,0.08);
+  --purple:#9b82e0;--green:#7abc52;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-body:'Sora',sans-serif;
+  --font-mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.7;overflow-x:hidden}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(45,191,138,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(201,168,76,.10) 0%,transparent 55%),radial-gradient(ellipse 40% 40% at 10% 70%,rgba(224,104,64,.07) 0%,transparent 50%);pointer-events:none}
+.hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");background-repeat:repeat;background-size:200px;pointer-events:none;opacity:.5}
+.hero-eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:20px;opacity:0;animation:fadeUp .8s ease .2s forwards}
+.hero-title{font-family:var(--font-display);font-size:clamp(56px,10vw,120px);font-weight:300;line-height:.95;letter-spacing:-.02em;margin-bottom:8px;opacity:0;animation:fadeUp .9s ease .35s forwards}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-subtitle{font-family:var(--font-display);font-size:clamp(18px,3vw,26px);font-weight:300;font-style:italic;color:var(--muted);margin-bottom:40px;opacity:0;animation:fadeUp .9s ease .5s forwards}
+.hero-meta{display:flex;align-items:center;gap:24px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .9s ease .65s forwards}
+.hero-pill{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border-hi);border-radius:999px;padding:6px 14px}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s ease 1.2s forwards}
+.hero-scroll span{font-family:var(--font-mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s ease infinite}
+
+/* SOURCE LEGEND */
+.source-legend{max-width:1100px;margin:0 auto;padding:20px 24px 0;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.src-item{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--muted)}
+.src-pip{width:12px;height:12px;border-radius:2px;flex-shrink:0}
+.src-pip.yours{background:var(--teal)}
+.src-pip.mine{background:var(--blue)}
+
+/* NAV */
+.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(14,13,11,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;padding:12px 0}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-btn{flex-shrink:0;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:none;border:1px solid transparent;border-radius:6px;padding:6px 12px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.nav-btn:hover{color:var(--text);border-color:var(--border-hi)}
+.nav-btn.active{color:var(--gold);border-color:var(--gold-dim);background:var(--gold-bg)}
+
+/* MAIN */
+.main{max-width:1100px;margin:0 auto;padding:0 24px 80px}
+.day-section{display:none;padding-top:56px}
+.day-section.visible{display:block}
+
+/* DAY HEADER */
+.day-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;padding-bottom:32px;border-bottom:1px solid var(--border);margin-bottom:40px}
+.day-number{font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.day-title{font-family:var(--font-display);font-size:clamp(32px,5vw,56px);font-weight:300;line-height:1.05;letter-spacing:-.02em}
+.day-title em{font-style:italic;color:var(--gold)}
+.day-desc{font-size:14px;color:var(--muted);margin-top:8px;max-width:520px}
+.day-weather-note{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--coral);border:1px solid rgba(224,104,64,.25);border-radius:8px;padding:10px 14px;max-width:220px;line-height:1.5;align-self:start}
+
+/* SOURCE PILL TAGS */
+.tag-source{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:4px;margin-right:5px;margin-bottom:4px}
+.tag-source.yours{background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-dim)}
+.tag-source.mine{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-dim)}
+.tag-source .src-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.tag-source.yours .src-dot{background:var(--teal)}
+.tag-source.mine .src-dot{background:var(--blue)}
+
+/* LEGEND */
+.legend{display:flex;flex-wrap:wrap;gap:16px;padding:20px 0 8px;margin-bottom:24px}
+.leg{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column}
+.tl-item{display:grid;grid-template-columns:72px 1px 1fr;gap:0 20px;min-height:80px}
+.tl-time{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--faint);text-align:right;padding-top:18px;line-height:1.3}
+.tl-rail{display:flex;flex-direction:column;align-items:center}
+.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:18px;position:relative;z-index:1}
+.tl-dot.adventure{background:var(--teal);box-shadow:0 0 0 3px rgba(45,191,138,.15)}
+.tl-dot.food{background:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.15)}
+.tl-dot.travel{background:var(--faint)}
+.tl-dot.nature{background:var(--green);box-shadow:0 0 0 3px rgba(122,188,82,.15)}
+.tl-dot.night{background:var(--purple);box-shadow:0 0 0 3px rgba(155,130,224,.15)}
+.tl-dot.work{background:var(--blue)}
+.tl-line{flex:1;width:1px;background:var(--border)}
+.tl-content{padding:12px 0 24px}
+
+/* EVENT CARDS */
+.event-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;transition:border-color .2s,background .2s}
+.event-card:hover{border-color:var(--border-hi);background:#201e19}
+.event-card.src-yours{border-left:3px solid var(--teal)}
+.event-card.src-mine{border-left:3px solid var(--blue)}
+.event-card.src-yours:hover{border-color:rgba(45,191,138,.3);border-left-color:var(--teal)}
+.event-card.src-mine:hover{border-color:rgba(91,159,212,.3);border-left-color:var(--blue)}
+.event-name{font-size:15px;font-weight:500;color:var(--text);margin-bottom:5px;line-height:1.3}
+.event-note{font-size:13px;color:var(--muted);line-height:1.6}
+.event-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+
+/* ACTIVITY TAGS */
+.tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:4px}
+.tag.adventure{background:var(--teal-bg);color:var(--teal);border:1px solid rgba(45,191,138,.2)}
+.tag.food{background:var(--gold-bg);color:var(--gold);border:1px solid rgba(201,168,76,.2)}
+.tag.travel{background:rgba(74,70,64,.3);color:var(--faint);border:1px solid var(--border)}
+.tag.nature{background:rgba(122,188,82,.08);color:var(--green);border:1px solid rgba(122,188,82,.2)}
+.tag.night{background:rgba(155,130,224,.08);color:var(--purple);border:1px solid rgba(155,130,224,.2)}
+.tag.work{background:var(--blue-bg);color:var(--blue);border:1px solid rgba(91,159,212,.2)}
+.tag.warn{background:rgba(224,104,64,.08);color:var(--coral);border:1px solid rgba(224,104,64,.2)}
+.tag.summit{background:rgba(91,159,212,.1);color:var(--blue);border:1px solid rgba(91,159,212,.25)}
+
+/* CALLOUT */
+.callout{border-left:2px solid var(--gold);background:var(--gold-bg);border-radius:0 10px 10px 0;padding:14px 18px;margin:8px 0 4px;font-size:13px;color:var(--muted);line-height:1.6}
+.callout.warn{border-color:var(--coral);background:rgba(224,104,64,.06)}
+.callout.info{border-color:var(--blue);background:var(--blue-bg)}
+.callout strong{color:var(--text);font-weight:500}
+
+/* BOOKING BAR */
+.booking-bar{background:var(--card);border:1px solid var(--gold-dim);border-radius:12px;padding:20px 24px;margin-bottom:40px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
+.booking-bar-title{font-family:var(--font-mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.booking-item{font-size:13px;color:var(--muted);line-height:1.6;flex:1;min-width:200px}
+.booking-item strong{color:var(--text);font-weight:500;display:block}
+
+/* MAP GRID */
+.map-section{margin-top:48px;border-top:1px solid var(--border);padding-top:40px}
+.section-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.map-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.map-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s,transform .2s}
+.map-card:hover{border-color:var(--border-hi);transform:translateY(-2px)}
+.map-card.src-yours{border-left:3px solid var(--teal)}
+.map-card.src-mine{border-left:3px solid var(--blue)}
+.map-card-img-placeholder{width:100%;height:120px;background:linear-gradient(135deg,#1c1a16 0%,#252119 100%);display:flex;align-items:center;justify-content:center;font-size:26px}
+.map-card-body{padding:14px 16px}
+.map-card-name{font-size:14px;font-weight:500;color:var(--text);margin-bottom:3px}
+.map-card-src{margin:5px 0}
+.map-card-detail{font-size:12px;color:var(--muted);line-height:1.5}
+.map-card-link{display:inline-block;margin-top:8px;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid var(--gold-dim);padding:4px 10px;border-radius:4px;transition:background .15s}
+.map-card-link:hover{background:var(--gold-bg)}
+
+/* OMIT */
+.omit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:20px}
+.omit-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px}
+.omit-card-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:6px}
+.omit-card-text{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* FOOTER */
+.site-footer{border-top:1px solid var(--border);padding:40px 24px;text-align:center}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-title{font-family:var(--font-display);font-size:28px;font-weight:300;font-style:italic;color:var(--muted);margin-bottom:8px}
+.footer-note{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--faint)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollPulse{0%,100%{opacity:.4;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.1)}}
+
+@media(max-width:680px){
+  .day-header{grid-template-columns:1fr}
+  .day-weather-note{max-width:100%}
+  .tl-item{grid-template-columns:60px 1px 1fr;gap:0 14px}
+  .tl-time{font-size:10px}
+  .map-grid{grid-template-columns:1fr 1fr}
+  .booking-bar{flex-direction:column}
+}
+@media(max-width:400px){.map-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-eyebrow">March 23 – 29, 2026 &nbsp;·&nbsp; 7 days</div>
+  <h1 class="hero-title">Big <em>Island</em><br>Hawaiʻi</h1>
+  <p class="hero-subtitle">A chef's adventure — lava, coral, and plate lunch</p>
+  <div class="hero-meta">
+    <span class="hero-pill">Kona → Hilo</span>
+    <span class="hero-pill">Jeep Wrangler 4WD</span>
+    <span class="hero-pill">Fly in/out KOA</span>
+    <span class="hero-pill">Rainy-day routing</span>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<div class="source-legend">
+  <div class="src-item"><div class="src-pip yours"></div> Your original recommendation</div>
+  <div class="src-item"><div class="src-pip mine"></div> My addition</div>
+</div>
+
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showDay(0)">Day 1 · Mon 3/23</button>
+    <button class="nav-btn" onclick="showDay(1)">Day 2 · Tue 3/24</button>
+    <button class="nav-btn" onclick="showDay(2)">Day 3 · Wed 3/25</button>
+    <button class="nav-btn" onclick="showDay(3)">Day 4 · Thu 3/26</button>
+    <button class="nav-btn" onclick="showDay(4)">Day 5 · Fri 3/27</button>
+    <button class="nav-btn" onclick="showDay(5)">Day 6 · Sat 3/28</button>
+    <button class="nav-btn" onclick="showDay(6)">Day 7 · Sun 3/29</button>
+    <button class="nav-btn" onclick="showDay(7)">Notes &amp; Bookings</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- DAY 1 -->
+<section id="day-0" class="day-section visible">
+  <div class="day-header">
+    <div>
+      <div class="day-number">Day 01 · Monday, March 23</div>
+      <h2 class="day-title">Arrival<br>in <em>Kona</em></h2>
+      <p class="day-desc">Noon landing, local food run, Hapuna sunset swim, and first dinner on the water.</p>
+    </div>
+  </div>
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:var(--blue)"></div>Work/prep</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--teal)"></div>Adventure</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--gold)"></div>Food</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--green)"></div>Nature</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--purple)"></div>Night experience</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--faint)"></div>Transit</div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">12:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot travel"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag travel">Transit</span></div>
+        <div class="event-name">Land at KOA · pick up Jeep Wrangler</div>
+        <div class="event-note">Practice engaging 4WD Low Range (4LO) in the parking lot — rangers at Mauna Kea will ask you to demonstrate it on Day 3. Drive to hotel (~20 min).</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">1:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-yours">
+        <div class="event-tags"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span><span class="tag food">Snack</span></div>
+        <div class="event-name">Matsuyama Food & Fuel — poke, musubi, butter mochi</div>
+        <div class="event-note">3 min from the airport. Spicy ahi poke, musubi, butter mochi, poke nachos. Best grab-and-go on the island. Your recommendation to stock up here.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">1:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot work"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag work">Work</span></div>
+        <div class="event-name">Hotel check-in + 2-hr work block</div>
+        <div class="event-note">Book manta ray tour for Day 3 if not already done — Sea Paradise fills fast: seaquesthawaii.com or (808) 329-7238.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">4:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag food">Small plate</span></div>
+        <div class="event-name">Da Poke Shack — sit-down traditional poke</div>
+        <div class="event-note">Classic Hawaiian-style poke in multiple preparations — raw ahi, spicy, limu. Kona's most dedicated poke spot. Quick pre-beach snack.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">4:45 PM</div>
+      <div class="tl-rail"><div class="tl-dot nature"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag nature">Nature</span></div>
+        <div class="event-name">Hapuna Beach — golden hour swim</div>
+        <div class="event-note">Best white-sand beach on the island. Soft sand, clean water, lifeguards on duty. $15 parking (card only). ~30 min north of Kona.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">7:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag food">Dinner</span></div>
+        <div class="event-name">Huggo's on the Rocks — oceanfront seafood</div>
+        <div class="event-note">Kona institution on the water. Fresh-caught seafood, kalua pork nachos, sunset views over Kailua Bay. Your Kona Brewing recommendation is moved to Day 4 as the post-volcano recovery dinner.</div>
+      </div></div>
+    </div>
+  </div>
+  <div class="map-section">
+    <div class="section-label">Today's stops</div>
+    <div class="map-grid">
+      <div class="map-card src-yours"><div class="map-card-img-placeholder">🍱</div><div class="map-card-body"><div class="map-card-name">Matsuyama Food & Fuel</div><div class="map-card-src"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span></div><div class="map-card-detail">73-285 Kahilihili St · Open 4 AM–9 PM</div><a href="https://maps.google.com/?q=Matsuyama+Food+and+Fuel+Kona" target="_blank" class="map-card-link">Maps ↗</a></div></div>
+      <div class="map-card"><div class="map-card-img-placeholder">🏖️</div><div class="map-card-body"><div class="map-card-name">Hapuna Beach</div><div class="map-card-detail">Old Puako Rd · 7 AM–6:30 PM · $15 parking</div><a href="https://maps.google.com/?cid=16026534171672240924" target="_blank" class="map-card-link">Maps ↗</a></div></div>
+      <div class="map-card src-mine"><div class="map-card-img-placeholder">🐟</div><div class="map-card-body"><div class="map-card-name">Huggo's on the Rocks</div><div class="map-card-src"><span class="tag-source mine"><span class="src-dot"></span>My addition</span></div><div class="map-card-detail">75-5828 Kahakai Rd, Kailua-Kona</div><a href="https://maps.google.com/?q=Huggo's+on+the+Rocks+Kona" target="_blank" class="map-card-link">Maps ↗</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 2 -->
+<section id="day-1" class="day-section">
+  <div class="day-header">
+    <div>
+      <div class="day-number">Day 02 · Tuesday, March 24</div>
+      <h2 class="day-title"><em>Kealakekua</em> Bay<br>+ Coffee Country</h2>
+      <p class="day-desc">Morning boat snorkel at the world's best reef, coffee farm, Super J's plate lunch, Gypsea Gelato, and Merriman's farm-to-table dinner in Waimea.</p>
+    </div>
+  </div>
+  <div class="booking-bar">
+    <div class="booking-item"><strong>⚠️ Pre-book snorkel cruise</strong>captaincooksnorkelingcruises.com or fair-wind.com · ~$85/person · Departs 8 AM</div>
+    <div class="booking-item"><strong>⚠️ Merriman's — reserve now</strong>merrimanshawaii.com or (808) 885-6822 · Prix fixe dinner</div>
+    <div class="booking-item"><strong>⚠️ Miyazaki Sushi — if using as alt</strong>(808) 975-6495 · miyazakisushi.com · Closed Tuesdays</div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">6:30 AM</div>
+      <div class="tl-rail"><div class="tl-dot work"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag work">Work</span></div>
+        <div class="event-name">Work block + drive to Honokohau Harbor</div>
+        <div class="event-note">2 hours. Depart by 7:45 AM. Pack mask, fins, sunscreen, 2L water.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">8:00 AM</div>
+      <div class="tl-rail"><div class="tl-dot adventure"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-yours">
+        <div class="event-tags"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span><span class="tag adventure">Adventure</span><span class="tag food">Lunch included</span></div>
+        <div class="event-name">Kealakekua Bay Snorkel Cruise — Captain Cook Monument</div>
+        <div class="event-note">Your recommendation for the ~$85/person tour with lunch. 4-hr boat cruise, ~1.5 hr snorkeling at the most biodiverse reef in Hawaii. Dolphin sightings common. 315-acre Marine Life Conservation District — fish biomass 2–3× denser than unprotected reefs.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">1:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-yours">
+        <div class="event-tags"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span><span class="tag food">Experience</span></div>
+        <div class="event-name">Heavenly Hawaiian Coffee Farm Tour</div>
+        <div class="event-note">Your recommendation to pair this with Super J's. 1-hr guided walk through one of Kona's finest farms. Taste 5 varieties, see the full process from cherry to cup. Stunning valley views. Open Mon–Sat 8:30–4:30, Holualoa hillside.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">2:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-yours">
+        <div class="event-tags"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span><span class="tag food">Lunch</span></div>
+        <div class="event-name">Kaaloa's Super J's — the plate lunch</div>
+        <div class="event-note">Your recommendation. Pork laulau, kalua pork and cabbage, mac salad, housemade spicy soy sauce. Widely considered one of the best plate lunch spots in America. Captain Cook. Mon/Wed–Sat until 3 PM only.</div>
+        <div class="callout"><strong>Order the 3-combo plate.</strong> Chicken laulau + pork laulau + kalua pig and cabbage. Don't skip the mango cake.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">3:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag food">Snack / Tea</span></div>
+        <div class="event-name">Teshima's Restaurant — Japanese comfort food since 1929</div>
+        <div class="event-note">On Hwy 11 in Honalo on the drive back north. Family-run since 1929 — tonkatsu, miso soup, Japanese tea. A genuine local institution. Good small stop between Super J's and Kona.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">4:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-yours">
+        <div class="event-tags"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span><span class="tag food">Dessert</span></div>
+        <div class="event-name">Gypsea Gelato + affogato coffee bar</div>
+        <div class="event-note">Your recommendation for both. Best gelato in Kona — tom kha, Kona coffee, wild rotating seasonal flavors. Hit the nearby espresso bar for your affogato. Ali'i Drive at Coconut Grove. Open noon–9 PM.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">6:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag food">Dinner</span><span class="tag warn">Reserve required</span></div>
+        <div class="event-name">Merriman's Waimea — farm-to-table dinner</div>
+        <div class="event-note">On the drive back through Waimea — perfectly on the route home. Peter Merriman, godfather of Hawaii Regional Cuisine. 90%+ locally sourced, first net-zero restaurant in Hawaiʻi. Prix fixe dinner menu. Named Best Big Island Restaurant by Honolulu Magazine 15+ times. Reserve: merrimanshawaii.com or (808) 885-6822.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">Alt 7 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-yours">
+        <div class="event-tags"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span><span class="tag food">Dinner alt</span><span class="tag warn">Reservation required</span></div>
+        <div class="event-name">Miyazaki Sushi & Izakaya — if staying Kona-side</div>
+        <div class="event-note">Your pick. Best sushi in Kona — fresh uni, toro, innovative rolls. Use this if you prefer not to drive to Waimea. Note: closed Tuesdays. (808) 975-6495 or miyazakisushi.com.</div>
+      </div></div>
+    </div>
+  </div>
+  <div class="map-section">
+    <div class="section-label">Today's stops</div>
+    <div class="map-grid">
+      <div class="map-card src-yours"><div class="map-card-img-placeholder">⛵</div><div class="map-card-body"><div class="map-card-name">Honokohau Harbor · Snorkel</div><div class="map-card-src"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span></div><div class="map-card-detail">74-381 Kealakehe Pkwy · Departs 8 AM</div><a href="https://captaincooksnorkelingcruises.com" target="_blank" class="map-card-link">Book ↗</a></div></div>
+      <div class="map-card src-yours"><div class="map-card-img-placeholder">☕</div><div class="map-card-body"><div class="map-card-name">Heavenly Hawaiian Coffee Farm</div><div class="map-card-src"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span></div><div class="map-card-detail">78-1136 Bishop Rd, Holualoa · Mon–Sat</div><a href="https://heavenlyhawaiian.com" target="_blank" class="map-card-link">Book ↗</a></div></div>
+      <div class="map-card src-yours"><div class="map-card-img-placeholder">🍱</div><div class="map-card-body"><div class="map-card-name">Kaaloa's Super J's</div><div class="map-card-src"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span></div><div class="map-card-detail">83-5409 Mamalahoa Hwy · Closes 3 PM</div><a href="https://maps.google.com/?cid=12511861335155933303" target="_blank" class="map-card-link">Maps ↗</a></div></div>
+      <div class="map-card src-yours"><div class="map-card-img-placeholder">🍦</div><div class="map-card-body"><div class="map-card-name">Gypsea Gelato</div><div class="map-card-src"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span></div><div class="map-card-detail">75-5817 Ali'i Dr F-16 · Noon–9 PM</div><a href="https://www.gypseagelato.com" target="_blank" class="map-card-link">Website ↗</a></div></div>
+      <div class="map-card src-mine"><div class="map-card-img-placeholder">🌿</div><div class="map-card-body"><div class="map-card-name">Merriman's Waimea</div><div class="map-card-src"><span class="tag-source mine"><span class="src-dot"></span>My addition</span></div><div class="map-card-detail">65-1227 Opelo Rd · Reserve required</div><a href="https://www.merrimanshawaii.com/location/big-island/" target="_blank" class="map-card-link">Reserve ↗</a></div></div>
+      <div class="map-card src-yours"><div class="map-card-img-placeholder">🍣</div><div class="map-card-body"><div class="map-card-name">Miyazaki Sushi (alt dinner)</div><div class="map-card-src"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span></div><div class="map-card-detail">75-5742 Kuakini Hwy #103 · Closed Tue</div><a href="https://www.miyazakisushi.com" target="_blank" class="map-card-link">Reserve ↗</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 3 -->
+<section id="day-2" class="day-section">
+  <div class="day-header">
+    <div>
+      <div class="day-number">Day 03 · Wednesday, March 25</div>
+      <h2 class="day-title">Mauna Kea <em>Summit</em><br>+ Manta Rays</h2>
+      <p class="day-desc">Rain replaces mud hikes with a Waimea food crawl. The Jeep Wrangler unlocks the summit at 13,796 ft. Manta ray night snorkel closes out the evening.</p>
+    </div>
+    <div class="day-weather-note">Rain plan<br>White Road + Mud Lane <strong>removed</strong> — impassable when wet. Summit + mantas replace them.</div>
+  </div>
+  <div class="callout info" style="margin-bottom:24px"><strong>Jeep Wrangler unlocks the Mauna Kea summit.</strong> Rangers at the VIS exit verify 4LO before allowing you past. Practice engaging it before you leave Kona on Day 1. Confirm in writing with your rental company that summit access is permitted — most major rental partners prohibit it contractually even if the vehicle is capable.</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">7:00 AM</div>
+      <div class="tl-rail"><div class="tl-dot work"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag work">Work</span></div>
+        <div class="event-name">Work block + Mauna Kea weather check</div>
+        <div class="event-note">Weather hotline: (808) 935-6268 — automated, updated daily. Summit webcams: mkwc.ifa.hawaii.edu. Summit may be icy or closed in March. If closed, VIS stargazing at 9,200 ft is still extraordinary.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">9:00 AM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag food">Breakfast</span></div>
+        <div class="event-name">Waimea Farmers Market at Keck Observatory HQ</div>
+        <div class="event-note">Every Saturday. Local vendors, malasadas, fresh tropical produce, live music. Free entry. Waimea is directly on the route to Saddle Road. Grab a walk-around breakfast before heading up.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:30 AM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag food">Lunch</span></div>
+        <div class="event-name">Harmoni Foods · Honoka'a — Korean small plates</div>
+        <div class="event-note">Tiny counter run by a former Four Seasons chef. Exclusively local sourcing — Big Island grass-fed beef, pasture-raised eggs, housemade gochujang and kimchi. Bibimbap bowls are the signature. A genuine hidden gem on the Hamakua Coast on the route to Saddle Road.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">12:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag food">Snack</span></div>
+        <div class="event-name">Tex Drive In · Honoka'a — fresh malasadas</div>
+        <div class="event-note">Also in Honoka'a. Fresh Portuguese malasadas — classic or filled with chocolate, haupia, or guava. A Big Island institution. Car snack for the summit drive.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">2:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot travel"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag travel">Transit</span></div>
+        <div class="event-name">Drive to Mauna Kea via Saddle Road (Hwy 200)</div>
+        <div class="event-note">Full tank required before you start up — nearest gas is 35 miles from the VIS. Turn AC off on the ascent including defrost. ~1.5 hr from Waimea. Turn onto Mauna Kea Access Road at Mile Marker 28.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">3:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot nature"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-yours">
+        <div class="event-tags"><span class="tag-source yours"><span class="src-dot"></span>Your pick (upgraded to summit)</span><span class="tag summit">Summit 13,796 ft</span></div>
+        <div class="event-name">Mauna Kea VIS → Summit — Jeep Wrangler 4LO</div>
+        <div class="event-note">Your recommendation was VIS stargazing. The Wrangler now gives you the full summit road. Acclimate 30–60 min at VIS (9,200 ft). Rangers verify 4LO at the exit gate. Drive the unpaved gravel road to the summit — 40% less oxygen at the top, 33°F+ with windchill. Bring warm jackets, gloves, hats. Arrive before sunset for above-cloud views and the observatory domes opening. Summit road closes 30 min after sunset.</div>
+        <div class="callout warn"><strong>Use 4LO on the descent — do not ride your brakes.</strong> Brake failure from overheating is the most common incident. Engine braking in 4LO controls your speed on the way down.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">7:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot travel"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag travel">Transit</span></div>
+        <div class="event-name">Descend to Kona via Saddle Road</div>
+        <div class="event-note">~1.5 hr. The manta tour departs around 8:30–9 PM from Keauhou Bay, 7 miles south of Kona. Eat something light on the drive — you'll be in the water soon.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">8:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot night"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My operator pick · your request</span><span class="tag night">Night experience</span></div>
+        <div class="event-name">Sea Paradise — Manta Ray Night Snorkel at Manta Village</div>
+        <div class="event-note">You requested manta rays on night 3. Sea Paradise operates from Keauhou Bay at Manta Village — the original and most consistent site with 90%+ sighting rates on most nights. Float on a light board while mantas soar within inches feeding on plankton. Wingspans to 12 ft, no stingers. ~2 hrs, wetsuits provided. Free rebook guarantee if no mantas. ~$90/person. seaquesthawaii.com</div>
+        <div class="callout"><strong>Manta Village vs other sites.</strong> The three Kona manta sites — Manta Village near Keauhou is historically the most reliable. The other sites see mantas less consistently.</div>
+      </div></div>
+    </div>
+  </div>
+  <div class="map-section">
+    <div class="section-label">Today's stops</div>
+    <div class="map-grid">
+      <div class="map-card src-mine"><div class="map-card-img-placeholder">🍚</div><div class="map-card-body"><div class="map-card-name">Harmoni Foods · Honoka'a</div><div class="map-card-src"><span class="tag-source mine"><span class="src-dot"></span>My addition</span></div><div class="map-card-detail">Honoka'a, HI · Hamakua Coast</div><a href="https://maps.google.com/?q=Harmoni+Foods+Honokaa+Hawaii" target="_blank" class="map-card-link">Maps ↗</a></div></div>
+      <div class="map-card src-yours"><div class="map-card-img-placeholder">🏔️</div><div class="map-card-body"><div class="map-card-name">Mauna Kea VIS + Summit</div><div class="map-card-src"><span class="tag-source yours"><span class="src-dot"></span>Your pick (upgraded)</span></div><div class="map-card-detail">Mauna Kea Access Rd · VIS 9 AM–9 PM</div><a href="https://hilo.hawaii.edu/maunakea/visitor-information/" target="_blank" class="map-card-link">Official ↗</a></div></div>
+      <div class="map-card src-mine"><div class="map-card-img-placeholder">🌊</div><div class="map-card-body"><div class="map-card-name">Sea Paradise · Manta Village</div><div class="map-card-src"><span class="tag-source mine"><span class="src-dot"></span>My operator pick</span></div><div class="map-card-detail">Keauhou Bay · ~$90/person · Nightly</div><a href="https://www.seaquesthawaii.com/snorkeling-tours/night-manta-experience/" target="_blank" class="map-card-link">Book ↗</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 4 -->
+<section id="day-3" class="day-section">
+  <div class="day-header">
+    <div>
+      <div class="day-number">Day 04 · Thursday, March 26</div>
+      <h2 class="day-title">Hawai'i Volcanoes<br><em>National Park</em></h2>
+      <p class="day-desc">Rain-proof full day. Kilauea Iki crater hike, lava tube, Tuk Tuk Thai, volcano winery, and Kona Brewing for the post-volcano recovery dinner.</p>
+    </div>
+  </div>
+  <div class="callout warn" style="margin-bottom:24px"><strong>Removed due to rain:</strong> Captain Cook monument hike (steep clay, dangerous when wet) and Ke'ei cliff jump (single-lane lava mud road, impassable). Both are excellent in dry conditions — revisit if weather breaks.</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">6:30 AM</div>
+      <div class="tl-rail"><div class="tl-dot work"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag work">Work</span></div>
+        <div class="event-name">Work block + park prep</div>
+        <div class="event-note">Pack: rain jacket, closed-toe shoes, headlamp, 1 gallon water per person. Check nps.gov/havo for eruption status and trail conditions.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">8:30 AM</div>
+      <div class="tl-rail"><div class="tl-dot travel"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag travel">Transit</span></div>
+        <div class="event-name">Drive to Hawai'i Volcanoes National Park</div>
+        <div class="event-note">~45 min from Hilo side or ~2 hrs from Kona. $30/vehicle or National Parks Annual Pass ($80).</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">9:30 AM</div>
+      <div class="tl-rail"><div class="tl-dot adventure"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag adventure">Hike</span></div>
+        <div class="event-name">Kīlauea Iki Crater Trail — 4-mile loop</div>
+        <div class="event-note">Best hike in the park. Descend through ʻōhiʻa rainforest to the solidified lava lake floor — steam vents still active, misty conditions are atmospheric. 360° crater views. Allow 2.5–3 hrs.</div>
+        <div class="callout"><strong>The crater floor was a lava lake in 1959.</strong> You're walking on 65 years of rock. Steam still rises from cracks beneath your feet.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">12:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot adventure"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag adventure">Explore</span></div>
+        <div class="event-name">Thurston Lava Tube (Nāhuku)</div>
+        <div class="event-note">Walk through a 500-year-old volcanic cave. Cool and otherworldly. ~20 min walk-through. If the main lot is full, park at Kīlauea Iki Overlook — trail connects.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">1:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-yours">
+        <div class="event-tags"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span><span class="tag food">Lunch</span></div>
+        <div class="event-name">Tuk Tuk Thai — lunch near Volcano Village</div>
+        <div class="event-note">Your recommendation for good Thai near the volcano. Outstanding food truck — avocado curry, spring rolls, pad thai, Thai iced tea. Wed–Sun 11 AM–6 PM only. Cash preferred.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">3:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot nature"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag nature">Scenic</span></div>
+        <div class="event-name">Chain of Craters Road + Halemaʻumaʻu crater glow at dusk</div>
+        <div class="event-note">Drive past ancient lava flows to where the road disappears into the ocean. Stay for the crater glow after dark if Kilauea is erupting. Check: nps.gov/havo. Bring a headlamp for the walk back.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">5:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag food">Tasting</span></div>
+        <div class="event-name">Volcano Winery — local fruit wine tasting</div>
+        <div class="event-note">Small winery near the park making guava, macadamia honey, and Symphony grape wines at 4,000 ft elevation. Quick tasting on the exit route — unique Big Island terroir nowhere else on earth.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">8:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-yours">
+        <div class="event-tags"><span class="tag-source yours"><span class="src-dot"></span>Your pick (moved from Day 1)</span><span class="tag food">Dinner</span></div>
+        <div class="event-name">Kona Brewing Co. — schooner & calamari</div>
+        <div class="event-note">Your recommendation. Cold Longboard or Big Wave on tap, calamari, harbor views. Moved here from Day 1 as the post-volcano recovery dinner — you've earned it. Open until 9 PM.</div>
+      </div></div>
+    </div>
+  </div>
+  <div class="map-section">
+    <div class="section-label">Today's stops</div>
+    <div class="map-grid">
+      <div class="map-card"><div class="map-card-img-placeholder">🌋</div><div class="map-card-body"><div class="map-card-name">Hawai'i Volcanoes NP</div><div class="map-card-detail">1 Crater Rim Dr · Open 24 hrs · $30/vehicle</div><a href="https://nps.gov/havo" target="_blank" class="map-card-link">Park Info ↗</a></div></div>
+      <div class="map-card src-yours"><div class="map-card-img-placeholder">🍜</div><div class="map-card-body"><div class="map-card-name">Tuk Tuk Thai Food Truck</div><div class="map-card-src"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span></div><div class="map-card-detail">99-1621 Piimauna Dr · Wed–Sun 11–6 PM</div><a href="https://maps.google.com/?cid=14758857213471655755" target="_blank" class="map-card-link">Maps ↗</a></div></div>
+      <div class="map-card src-yours"><div class="map-card-img-placeholder">🍺</div><div class="map-card-body"><div class="map-card-name">Kona Brewing Co.</div><div class="map-card-src"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span></div><div class="map-card-detail">74-5612 Pawai Pl, Kailua-Kona · 11–9 PM</div><a href="https://maps.google.com/?cid=760399384222451238" target="_blank" class="map-card-link">Maps ↗</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 5 -->
+<section id="day-4" class="day-section">
+  <div class="day-header">
+    <div>
+      <div class="day-number">Day 05 · Friday, March 27</div>
+      <h2 class="day-title">Transfer:<br><em>Kona → Hilo</em></h2>
+      <p class="day-desc">Pine Tree breakfast, Pololu Valley cliffs, Hawaiian Vanilla Co. luncheon, Waipi'o lookout, and Moon and Turtle dinner in Hilo.</p>
+    </div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">7:00 AM</div>
+      <div class="tl-rail"><div class="tl-dot work"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag work">Work</span></div>
+        <div class="event-name">Work block + hotel checkout</div>
+        <div class="event-note">Load the Jeep. Long scenic drive day with stops.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">9:00 AM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-yours">
+        <div class="event-tags"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span><span class="tag food">Breakfast</span></div>
+        <div class="event-name">Pine Tree Cafe — local breakfast</div>
+        <div class="event-note">Your recommendation. Kona local institution near the airport. Loco moco with handmade patty, spicy ahi poke plate, teriyaki chicken. Open 6 AM–7 PM daily.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:30 AM</div>
+      <div class="tl-rail"><div class="tl-dot nature"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag nature">Nature</span></div>
+        <div class="event-name">Pololu Valley Lookout — Kohala Coast</div>
+        <div class="event-note">End of North Kohala road. Jaw-dropping cliffs and a black sand beach below. Hike down (~20 min each way) for the full view — steep but worth it. Free.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">12:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag food">Snack</span></div>
+        <div class="event-name">Shave ice stop — Waimea area</div>
+        <div class="event-note">Real shave ice — ice shaved paper-thin with local fruit syrups. A good rainy-day comfort snack on the Hamakua drive. Look for a local stand near Waimea or Honoka'a.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">1:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-yours">
+        <div class="event-tags"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span><span class="tag food">Lunch experience</span><span class="tag warn">Reserve required</span></div>
+        <div class="event-name">Hawaiian Vanilla Co. — luncheon + farm tour</div>
+        <div class="event-note">Your recommendation to tour a vanilla farm. Reserve in advance (~$60/person) — every course uses vanilla, garam masala shrimp, vanilla lemonade, vanilla ice cream. The only vanilla farm in the US. Near Paauilo off Hwy 19. Closes 3 PM. Book: hawaiianvanilla.com or (808) 776-1771.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">3:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot nature"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag nature">Nature</span></div>
+        <div class="event-name">Waipi'o Valley Lookout — Valley of the Kings</div>
+        <div class="event-note">Sacred valley said to be King Kamehameha's childhood home. Black sand beach and waterfalls visible from the overlook. Valley is closed to tourist vehicles — lookout only. Free, picnic tables on site. Do not attempt to drive down.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">5:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot travel"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag travel">Transit</span></div>
+        <div class="event-name">Arrive Hilo — hotel check-in</div>
+        <div class="event-note">~1 hr from Waipi'o. Freshen up before dinner.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">7:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag food">Dinner</span><span class="tag warn">Reserve required</span></div>
+        <div class="event-name">Moon and Turtle — small plates dinner</div>
+        <div class="event-note">Best restaurant in Hilo. Husband-and-wife run. Daily-changing farm-to-table small plates entirely based on what's local and in season — perfect for grazing. The menu evolves based on what farmers bring in each day. Reserve: (808) 961-0599. 51 Kalakaua St.</div>
+      </div></div>
+    </div>
+  </div>
+  <div class="map-section">
+    <div class="section-label">Today's stops</div>
+    <div class="map-grid">
+      <div class="map-card src-yours"><div class="map-card-img-placeholder">🍳</div><div class="map-card-body"><div class="map-card-name">Pine Tree Cafe</div><div class="map-card-src"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span></div><div class="map-card-detail">73-4040 Hulikoa Dr, Kona · 6 AM–7 PM</div><a href="https://maps.google.com/?cid=2675282181332177512" target="_blank" class="map-card-link">Maps ↗</a></div></div>
+      <div class="map-card src-yours"><div class="map-card-img-placeholder">🌿</div><div class="map-card-body"><div class="map-card-name">Hawaiian Vanilla Co.</div><div class="map-card-src"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span></div><div class="map-card-detail">43-2007 Paauilo Mauka Rd · Reserve required</div><a href="http://www.hawaiianvanilla.com/" target="_blank" class="map-card-link">Book ↗</a></div></div>
+      <div class="map-card src-mine"><div class="map-card-img-placeholder">🐢</div><div class="map-card-body"><div class="map-card-name">Moon and Turtle</div><div class="map-card-src"><span class="tag-source mine"><span class="src-dot"></span>My addition</span></div><div class="map-card-detail">51 Kalakaua St, Hilo · (808) 961-0599</div><a href="https://maps.google.com/?q=Moon+and+Turtle+Hilo" target="_blank" class="map-card-link">Maps ↗</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 6 -->
+<section id="day-5" class="day-section">
+  <div class="day-header">
+    <div>
+      <div class="day-number">Day 06 · Saturday, March 28</div>
+      <h2 class="day-title">Hilo<br><em>Culinary Crawl</em></h2>
+      <p class="day-desc">ʻAkaka Falls, Rainbow Falls, then an all-day Hilo food grazing tour — mochi, poke, Hilo Bay Café, Café Pesto, and the Hidden Nēnē speakeasy.</p>
+    </div>
+  </div>
+  <div class="callout" style="margin-bottom:24px"><strong>Designed for small plates throughout the day.</strong> All stops are covered from rain. The goal is to graze across many experiences rather than sit for one big meal.</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">7:00 AM</div>
+      <div class="tl-rail"><div class="tl-dot work"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag work">Work</span></div>
+        <div class="event-name">Work block</div>
+        <div class="event-note">2 hours. Call Two Ladies Kitchen now: (808) 961-4766 — they sell out by mid-morning.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">8:30 AM</div>
+      <div class="tl-rail"><div class="tl-dot nature"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag nature">Nature</span></div>
+        <div class="event-name">ʻAkaka Falls State Park</div>
+        <div class="event-note">442-ft waterfall — even more spectacular in rain. Gorgeous paved loop through wild tropical forest. Opens 8:30 AM. ~15 min north of Hilo near Honomu. $5/person or park on the road for free.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:00 AM</div>
+      <div class="tl-rail"><div class="tl-dot nature"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag nature">Nature</span></div>
+        <div class="event-name">Rainbow Falls — Hilo</div>
+        <div class="event-note">Waterfall over a natural lava cave. Visit early — morning light produces rainbows in the mist. 1-min walk from parking. $5/person non-resident.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">11:00 AM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag food">Snack</span></div>
+        <div class="event-name">Two Ladies Kitchen — mochi (call ahead)</div>
+        <div class="event-note">Most famous mochi shop on the island. Homemade mochi and manju in rotating seasonal flavors. Sells out by mid-morning almost every day. Call ahead: (808) 961-4766.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">11:45 AM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-yours">
+        <div class="event-tags"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span><span class="tag food">Snack + shopping</span></div>
+        <div class="event-name">KTA Super Store — poke counter + omiyage</div>
+        <div class="event-note">Your recommendation. Fresh daily poke from the counter — multiple preparations. Stock up on omiyage: local chips, Kona coffee, Hawaiian snacks. Two Ladies mochi sometimes stocked here too: (808) 959-9111.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">1:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag food">Lunch</span></div>
+        <div class="event-name">Hilo Bay Café — farm-to-table with bay views</div>
+        <div class="event-note">Second-floor deck overlooking Hilo Bay and Mauna Kea. Hāmākua mushroom pot pie, ʻulu (breadfruit) potato gratin, fresh poke bowls. The Hāmākua mushrooms from local farms that thrive in rainy Hilo — you'll taste the difference. Strong wine list.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">3:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag food">Small plates</span></div>
+        <div class="event-name">Café Pesto — Italian-Hawaiian wood-fired</div>
+        <div class="event-note">Hilo institution since the 1980s. Wood-fired pizzas with Hawaiian ingredients — local fish, Hāmākua mushrooms, fresh herbs. Good grazing stop for a small plate between bigger experiences.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">6:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot night"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag night">Cocktails</span></div>
+        <div class="event-name">The Hidden Nēnē — underground speakeasy</div>
+        <div class="event-note">Underground bar on Furneaux Lane in downtown Hilo. Expertly crafted cocktails using local ingredients — pipikaula (dried beef), papaya, mango. Happy hour 6–8 PM. 4.7 stars, wildly popular with locals. Light bites available. A genuinely cool end to a great food day.</div>
+      </div></div>
+    </div>
+  </div>
+  <div class="map-section">
+    <div class="section-label">Today's stops</div>
+    <div class="map-grid">
+      <div class="map-card"><div class="map-card-img-placeholder">💧</div><div class="map-card-body"><div class="map-card-name">ʻAkaka Falls State Park</div><div class="map-card-detail">Honomu · Opens 8:30 AM · $5 entry</div><a href="https://maps.google.com/?cid=8254040130162188380" target="_blank" class="map-card-link">Maps ↗</a></div></div>
+      <div class="map-card src-yours"><div class="map-card-img-placeholder">🛒</div><div class="map-card-body"><div class="map-card-name">KTA Super Stores — Hilo</div><div class="map-card-src"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span></div><div class="map-card-detail">50 E Puainako St · 5:30 AM–10 PM</div><a href="http://www.ktasuperstores.com/" target="_blank" class="map-card-link">Website ↗</a></div></div>
+      <div class="map-card src-mine"><div class="map-card-img-placeholder">🍽️</div><div class="map-card-body"><div class="map-card-name">Hilo Bay Café</div><div class="map-card-src"><span class="tag-source mine"><span class="src-dot"></span>My addition</span></div><div class="map-card-detail">123 Lihiwai St, Hilo · Bay views</div><a href="https://maps.google.com/?q=Hilo+Bay+Cafe+Hawaii" target="_blank" class="map-card-link">Maps ↗</a></div></div>
+      <div class="map-card src-mine"><div class="map-card-img-placeholder">🍹</div><div class="map-card-body"><div class="map-card-name">The Hidden Nēnē</div><div class="map-card-src"><span class="tag-source mine"><span class="src-dot"></span>My addition</span></div><div class="map-card-detail">Furneaux Lane, Downtown Hilo · HH 6–8 PM</div><a href="https://maps.google.com/?q=The+Hidden+Nene+Hilo" target="_blank" class="map-card-link">Maps ↗</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 7 -->
+<section id="day-6" class="day-section">
+  <div class="day-header">
+    <div>
+      <div class="day-number">Day 07 · Sunday, March 29</div>
+      <h2 class="day-title">Black Sand,<br><em>Farewell Bites</em></h2>
+      <p class="day-desc">Hilo Farmers Market, Punalu'u black sand beach and sea turtles on the drive back, and one last poke at Matsuyama before the 10 PM flight.</p>
+    </div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">7:00 AM</div>
+      <div class="tl-rail"><div class="tl-dot work"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag work">Work</span></div>
+        <div class="event-name">Work block + hotel checkout</div>
+        <div class="event-note">Load the Jeep. Return drive toward KOA with stops.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">9:00 AM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-mine">
+        <div class="event-tags"><span class="tag-source mine"><span class="src-dot"></span>My addition</span><span class="tag food">Shopping</span></div>
+        <div class="event-name">Hilo Farmers Market — final local haul</div>
+        <div class="event-note">Open daily, largest on Wednesday and Saturday. Handmade shave ice, local tropical fruit, crafts. Grab fresh rambutan, jackfruit, or lychee if in season. Most affordable fresh produce on the island.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:30 AM</div>
+      <div class="tl-rail"><div class="tl-dot nature"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag nature">Nature</span></div>
+        <div class="event-name">Rainbow Falls — if not yet visited</div>
+        <div class="event-note">Optional stop if you skipped it on Day 6. Otherwise drive south.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">12:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot travel"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag travel">Transit</span></div>
+        <div class="event-name">Drive south: Hilo → Punalu'u → Kona on Hwy 11</div>
+        <div class="event-note">~2.5 hrs total with a beach stop through Ka'ū.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">2:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot nature"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag nature">Nature</span></div>
+        <div class="event-name">Punalu'u Black Sand Beach — sea turtles</div>
+        <div class="event-note">Jet-black volcanic sand with honu resting on shore. Keep 6 ft minimum distance — federal law. Dramatic mountain backdrop. Free parking. Very windy.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">5:00 PM</div>
+      <div class="tl-rail"><div class="tl-dot food"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card src-yours">
+        <div class="event-tags"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span><span class="tag food">Farewell bite</span></div>
+        <div class="event-name">Matsuyama Food & Fuel — final poke</div>
+        <div class="event-note">Your recommendation. One last spicy ahi poke and musubi. 3 min from KOA. The perfect send-off from the island.</div>
+      </div></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">7:30 PM</div>
+      <div class="tl-rail"><div class="tl-dot travel"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><div class="event-card">
+        <div class="event-tags"><span class="tag travel">Transit</span></div>
+        <div class="event-name">KOA Airport — 10 PM departure</div>
+        <div class="event-note">Return Jeep. Arrive 2+ hours early. Mahalo, Big Island. You'll be back.</div>
+      </div></div>
+    </div>
+  </div>
+  <div class="map-section">
+    <div class="section-label">Today's stops</div>
+    <div class="map-grid">
+      <div class="map-card"><div class="map-card-img-placeholder">🐢</div><div class="map-card-body"><div class="map-card-name">Punalu'u Black Sand Beach</div><div class="map-card-detail">Punalu'u, Ka'ū · Free parking</div><a href="https://maps.google.com/?cid=8317509423779642486" target="_blank" class="map-card-link">Maps ↗</a></div></div>
+      <div class="map-card src-yours"><div class="map-card-img-placeholder">🍱</div><div class="map-card-body"><div class="map-card-name">Matsuyama Food & Fuel</div><div class="map-card-src"><span class="tag-source yours"><span class="src-dot"></span>Your pick</span></div><div class="map-card-detail">73-285 Kahilihili St · 3 min from KOA</div><a href="https://maps.google.com/?q=Matsuyama+Food+and+Fuel+Kona" target="_blank" class="map-card-link">Maps ↗</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NOTES -->
+<section id="day-7" class="day-section">
+  <div class="day-header">
+    <div>
+      <div class="day-number">Planning Notes</div>
+      <h2 class="day-title">What to Book<br><em>Before You Fly</em></h2>
+      <p class="day-desc">Pre-trip bookings, Jeep 4LO notes, what was removed due to rain, and safety numbers.</p>
+    </div>
+  </div>
+  <div class="booking-bar">
+    <div><div class="booking-bar-title">⚡ Book these immediately — do not wait</div></div>
+    <div class="booking-item"><strong>Kealakekua Bay Snorkel (Day 2)</strong>captaincooksnorkelingcruises.com or fair-wind.com · ~$85/person · Departs 8 AM</div>
+    <div class="booking-item"><strong>Merriman's Waimea (Day 2 dinner)</strong>merrimanshawaii.com or (808) 885-6822 · Prix fixe</div>
+    <div class="booking-item"><strong>Miyazaki Sushi (Day 2 alt dinner)</strong>(808) 975-6495 · miyazakisushi.com · Closed Tuesdays</div>
+    <div class="booking-item"><strong>Manta Ray Night Snorkel (Day 3)</strong>seaquesthawaii.com or (808) 329-7238 · ~$90/person</div>
+    <div class="booking-item"><strong>Hawaiian Vanilla Co. Luncheon (Day 5)</strong>hawaiianvanilla.com or (808) 776-1771 · Closes 3 PM</div>
+    <div class="booking-item"><strong>Moon and Turtle (Day 5 dinner)</strong>(808) 961-0599 · Small place, fills fast</div>
+    <div class="booking-item"><strong>Two Ladies Kitchen mochi (Day 6)</strong>(808) 961-4766 · Call morning-of — sells out fast</div>
+  </div>
+  <div class="callout info" style="margin-bottom:28px">
+    <strong>Jeep Wrangler + Mauna Kea summit:</strong> Rangers now verify 4LO capability at the VIS exit gate before allowing access to the summit road. Practice engaging 4LO at KOA on Day 1. Confirm in writing with your rental company that summit access is approved — most major rental partners prohibit it contractually. <strong>Use 4LO on the descent — do not ride your brakes.</strong> Engine braking in 4LO controls your speed and prevents brake overheating.
+  </div>
+  <div class="section-label">Removed due to rain — available if conditions dry</div>
+  <div class="omit-grid">
+    <div class="omit-card"><div class="omit-card-label">White Road hike · Kamuela</div><div class="omit-card-text">Your original Day 3 morning. Dangerous in wet conditions. Can replace the Waimea food crawl morning if you get a dry day.</div></div>
+    <div class="omit-card"><div class="omit-card-label">Mud Lane · Honoka'a waterfalls</div><div class="omit-card-text">Your Day 3 partner hike. Same situation — impassable lava mud road when wet. Saves for a dry trip.</div></div>
+    <div class="omit-card"><div class="omit-card-label">Captain Cook Monument hike</div><div class="omit-card-text">Steep 3.7-mile exposed clay trail. Dangerous when wet — common rescue site. The Day 2 snorkel boat covers the reef without the risk. Add the hike on a dry future trip.</div></div>
+    <div class="omit-card"><div class="omit-card-label">Ke'ei Beach · cliff jump</div><div class="omit-card-text">Single-lane lava road becomes a mud trap in rain. Spectacular when dry — worth adding on a clear day if you get one.</div></div>
+    <div class="omit-card"><div class="omit-card-label">Manago Hotel breakfast</div><div class="omit-card-text">Your original recommendation. Removed due to routing (Captain Cook is covered by Super J's). If you want both: Manago for breakfast at 6 AM, then Super J's the same afternoon on Day 2.</div></div>
+    <div class="omit-card"><div class="omit-card-label">Kealakekua thrift shop</div><div class="omit-card-text">Your original recommendation — Treasure Island Thrift in Kealakekua. Tue–Sat 10–3 PM. Easy to add after Super J's on Day 2 before driving back north.</div></div>
+    <div class="omit-card"><div class="omit-card-label">Four Seasons fish pond tour</div><div class="omit-card-text">Your original recommendation — conditional on your contact. Confirm before flying. If it comes through, best paired with Day 4 afternoon after the volcano. Not a public experience.</div></div>
+  </div>
+  <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border)">
+    <div class="section-label">Safety numbers</div>
+    <div class="map-grid" style="margin-top:16px">
+      <div class="map-card"><div class="map-card-body"><div class="map-card-name">Mauna Kea Weather Hotline</div><div class="map-card-detail">(808) 935-6268 · Automated · Call before Day 3 drive-up</div></div></div>
+      <div class="map-card"><div class="map-card-body"><div class="map-card-name">Mauna Kea VIS Emergency</div><div class="map-card-detail">(808) 960-2952 · Minor emergencies · 911 for major</div></div></div>
+      <div class="map-card"><div class="map-card-body"><div class="map-card-name">Volcano Eruption Status</div><div class="map-card-detail">nps.gov/havo · Updated daily · Check before Day 4</div><a href="https://www.nps.gov/havo/learn/nature/current-eruption.htm" target="_blank" class="map-card-link">Check Status ↗</a></div></div>
+      <div class="map-card"><div class="map-card-body"><div class="map-card-name">DLNR · Kealakekua Bay</div><div class="map-card-detail">dlnr.hawaii.gov · Trail updates + kayak permits</div><a href="https://dlnr.hawaii.gov/" target="_blank" class="map-card-link">DLNR ↗</a></div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-title">Mahalo, Big Island</div>
+    <div class="footer-note">March 23–29, 2026 &nbsp;·&nbsp; Kona + Hilo &nbsp;·&nbsp; Jeep Wrangler &nbsp;·&nbsp; 7 days of lava, coral, and plate lunch</div>
+  </div>
+</footer>
+
+<script>
+function showDay(idx) {
+  document.querySelectorAll('.day-section').forEach((s,i) => s.classList.toggle('visible', i===idx));
+  document.querySelectorAll('.nav-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+  window.scrollTo({top:document.querySelector('.sticky-nav').offsetTop, behavior:'smooth'});
+}
+</script>
+</body>
+</html>
